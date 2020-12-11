@@ -1,0 +1,66 @@
+// A class library for making a consistent border in a html element.
+
+
+
+// development:
+@use "node_modules/@heymarco/spacer/index" as spc;
+@use "node_modules/@heymarco/container/index" as cont;
+
+// production:
+// @use "../../../node_modules/@heymarco/spacer/index" as spc;
+// @use "../../../node_modules/@heymarco/container/index" as cont;
+
+
+
+$class                          : ".masonry"    !default;
+$var-root                       : ":root"       !default;
+$var-prefix                     : "masonry"     !default;
+$cssvar: "";
+@if (($var-prefix == null) or ($var-prefix == "")) {
+    $cssvar: "--";
+} @else {
+    $cssvar: "--#{$var-prefix}-";
+}
+
+$padding-x          : var(#{cont.$cssvar}x, var(#{$cssvar}spacer-x))    !default;
+$padding-y          : var(#{cont.$cssvar}y, var(#{$cssvar}spacer-y))    !default;
+$spacer-x           : var(#{spc.$cssvar}default)                        !default;
+$spacer-y           : var(#{spc.$cssvar}default)                        !default;
+
+$items-min-width    : 250px                                             !default;
+$items-grow-height  : calc(var(#{$cssvar}items-min-width) * 0.10)       !default; // aspect ratio precision is 10%
+
+
+
+@if ($var-root) { #{$var-root} {
+    #{$cssvar}padding-x         : #{$padding-x};
+    #{$cssvar}padding-y         : #{$padding-y};
+    #{$cssvar}spacer-x          : #{$spacer-x};
+    #{$cssvar}spacer-y          : #{$spacer-y};
+
+    #{$cssvar}items-min-width   : #{$items-min-width};
+    #{$cssvar}items-grow-height : #{$items-grow-height};
+}}
+
+
+
+@mixin style {
+    // spacing:
+    padding-left    : var(#{$cssvar}padding-x);
+    padding-right   : var(#{$cssvar}padding-x);
+    padding-top     : var(#{$cssvar}padding-y);
+    padding-bottom  : var(#{$cssvar}padding-y);
+
+    // structure: grid properties:
+    display                 : grid;
+    grid-auto-flow          : row;
+    column-gap              : var(#{$cssvar}spacer-x);
+    row-gap                 : var(#{$cssvar}spacer-y);
+    grid-template-columns   : repeat(auto-fill, minmax(var(#{$cssvar}items-min-width), 1fr));
+    grid-auto-rows          : var(#{$cssvar}items-grow-height);
+    justify-items           : stretch; // streetches each masonry's items vertically (grid's x axis)
+    align-items             : stretch; // streetches each masonry's items horizontally (grid's y axis)
+}
+@if ($class) {
+    #{$class} { @include style; }
+}

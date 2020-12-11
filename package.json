@@ -1,0 +1,34 @@
+{
+  "name": "masonry",
+  "version": "1.0.0",
+  "description": "Creates a \"masonry\" grid layout for making beautiful (image or other) gallery.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyymarco/masonry.git"
+  },
+  "keywords": [
+    "masonry",
+    "gallery",
+    "thumbnail",
+    "collection",
+    "image",
+    "photo",
+    "layout",
+    "grid",
+    "css"
+  ],
+  "author": "HeyMarco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heyymarco/masonry/issues"
+  },
+  "homepage": "https://github.com/heyymarco/masonry#readme",
+  "dependencies": {
+    "@heymarco/container": "^1.0.10",
+    "@heymarco/spacer": "^1.0.2"
+  }
+}
