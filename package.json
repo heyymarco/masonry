@@ -29,6 +29,10 @@
   "homepage": "https://github.com/heyymarco/masonry#readme",
   "dependencies": {
     "@heymarco/container": "^1.0.10",
-    "@heymarco/spacer": "^1.0.2"
+    "@heymarco/element": "^1.0.4",
+    "@heymarco/element-config": "^1.0.0",
+    "@heymarco/spacer": "^1.0.2",
+    "@types/imagesloaded": "^4.1.2",
+    "imagesloaded": "^4.1.4"
   }
 }
