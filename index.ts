@@ -5,6 +5,9 @@ import ImagesLoaded from "imagesloaded";
 
 
 
+/**
+ * Creates a "masonry" grid layout for making beautiful (image or other) gallery.
+ */
 export default class Masonry extends Element {
     constructor(selector : Selector) {
         super(selector);
