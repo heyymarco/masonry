@@ -9,7 +9,7 @@ import ImagesLoaded from "imagesloaded";
  * Creates a "masonry" grid layout for making beautiful (image or other) gallery.
  */
 export default class Masonry extends Element {
-    constructor(selector : Selector) {
+    constructor(selector : Selector = Masonry.config.class) {
         super(selector);
     }
 
@@ -92,7 +92,7 @@ export default class Masonry extends Element {
      */
     static windowResizeHandler() {
         // masonry's layout might be broken if browser's window resized, so it need to be re-update:
-        new Masonry(Masonry.config.class).updateLayout();
+        new Masonry().updateLayout();
     }
 
     /**
@@ -116,8 +116,9 @@ export default class Masonry extends Element {
         /* deconfigure  = */ null,
         /* configure    = */ () => {
             // masonry's layout need to be updated when the .masonry class or verPrefix was changed:
-            new Masonry(Masonry.config.class).updateLayout();
-        }
+            new Masonry().updateLayout();
+        },
+        /* configFirst  = */ false // do not apply the config immediately. I'll apply it at startup time.
     );
 
     static startup() : void {
@@ -136,7 +137,7 @@ export default class Masonry extends Element {
 
 
         // update all masonry(es) for the first time;
-        new Masonry(Masonry.config.class).updateLayout();
+        new Masonry().updateLayout();
     }
 }
 Element.startup(Masonry.startup);
