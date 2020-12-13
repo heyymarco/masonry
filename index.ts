@@ -95,6 +95,24 @@ export default class Masonry extends Element {
         new Masonry().updateLayout();
     }
 
+    static _lastScrollPos = -1;
+    /**
+     * A function to be executed when the browser's window scrolled.
+     */
+    static windowScrollHandler() {
+        // solving the ImagesLoaded problem with <img loading="lazy"> that won't triggered when lazy image loaded
+        // so the easy solution is refreshing the masonry when the browser's scrolled every 1000px.
+
+        const position = Element.window.scrollTop()!;
+        if ((this._lastScrollPos == -1) || (Math.abs(position - this._lastScrollPos) >= 1000)) {
+            this._lastScrollPos = position;
+
+            console.log("scroll");
+
+            new Masonry().updateLayout();
+        }
+    }
+
     /**
      * A function to be executed when any image was loaded or reloaded on the html document.
      */
@@ -132,6 +150,9 @@ export default class Masonry extends Element {
         // watch the resize event of browser's window.
         Element.window
         .on("resize", () => Masonry.windowResizeHandler())
+
+        // watch the scroll event of browser's window.
+        .on("scroll", () => Masonry.windowScrollHandler())
         ;
 
 

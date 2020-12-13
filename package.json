@@ -1,6 +1,6 @@
 {
   "name": "@heymarco/masonry",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Creates a \"masonry\" grid layout for making beautiful (image or other) gallery.",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "dependencies": {
     "@heymarco/container": "^1.0.10",
     "@heymarco/element": "^1.0.4",
-    "@heymarco/element-config": "^1.0.2",
+    "@heymarco/element-config": "^1.0.3",
     "@heymarco/spacer": "^1.0.2",
     "@types/imagesloaded": "^4.1.2",
     "imagesloaded": "^4.1.4"
