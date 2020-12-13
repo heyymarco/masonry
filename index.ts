@@ -16,24 +16,24 @@ export default class Masonry extends Element {
 
 
     // static global variable across class Masonry instances
-    private static lazy = false;
-    private static markLayoutInvalidate = false;
+    private static _lazy = false;
+    private static _markLayoutInvalidate = false;
     updateLayout() {
-        if (Masonry.lazy) {
+        if (Masonry._lazy) {
             // when in lazy mode, just marking layout as invalidate, but not performing the actual updateLayoutNow
-            Masonry.markLayoutInvalidate = true;
+            Masonry._markLayoutInvalidate = true;
             return;
         }
 
 
         // set timer going to lazy mode:
-        Masonry.lazy = true; // now i'm lazy mode
+        Masonry._lazy = true; // now i'm lazy mode
         setTimeout(() => {
-            Masonry.lazy = false; // now i'm not lazy
+            Masonry._lazy = false; // now i'm not lazy
 
             // perform the delayed updateLayoutNow
-            if (Masonry.markLayoutInvalidate) {
-                Masonry.markLayoutInvalidate = false; // mark as done
+            if (Masonry._markLayoutInvalidate) {
+                Masonry._markLayoutInvalidate = false; // mark as done
 
                 this.updateLayout(); // performing the actual updateLayout
             }
@@ -110,18 +110,25 @@ export default class Masonry extends Element {
 
 
 
+    static _startedUp = false;
     static config = new ElementConfig(
         /* className    = */ ".masonry",
         /* varPrefix    = */ "masonry",
         /* deconfigure  = */ null,
         /* configure    = */ () => {
-            // masonry's layout need to be updated when the .masonry class or verPrefix was changed:
-            new Masonry().updateLayout();
+            if (Masonry._startedUp) {
+                // masonry's layout need to be updated when the .masonry class or verPrefix was changed:
+                new Masonry().updateLayout();
+            }
         },
         /* configFirst  = */ false // do not apply the config immediately. I'll apply it at startup time.
     );
 
     static startup() : void {
+        // mark this component was already started up:
+        Masonry._startedUp = true;
+
+
         // watch the resize event of browser's window.
         Element.window
         .on("resize", () => Masonry.windowResizeHandler())

@@ -1,6 +1,6 @@
 {
   "name": "@heymarco/masonry",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates a \"masonry\" grid layout for making beautiful (image or other) gallery.",
   "main": "index.js",
   "scripts": {
